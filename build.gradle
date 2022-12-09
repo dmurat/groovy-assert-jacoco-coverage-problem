@@ -1,0 +1,38 @@
+plugins {
+  id "groovy"
+  id "jacoco"
+}
+
+group = "com.example.groovy"
+version = "0.0.1-SNAPSHOT"
+
+sourceCompatibility = "17"
+targetCompatibility = "17"
+
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  configureEach {
+    resolutionStrategy {
+      // prevent caching for snapshot dependencies
+      //noinspection GroovyAssignabilityCheck
+      cacheChangingModulesFor(0, "seconds")
+    }
+  }
+}
+
+test {
+  jvmArgs = ["-XX:TieredStopAtLevel=1"]
+  useJUnitPlatform()
+}
+
+jacocoTestReport {
+  dependsOn test
+}
+
+dependencies {
+  implementation "org.apache.groovy:groovy:4.0.6"
+  testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
+}
