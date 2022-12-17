@@ -49,7 +49,7 @@ class AssertExample {
       if (var10000 != null) {
         var1.clear();
       } else {
-        Throwable throwable = fetchAssertFailed(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
+        Throwable throwable = createAssertionError(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
         throw throwable
       }
     } catch (Throwable var3) {
@@ -137,7 +137,7 @@ class AssertExample {
       if (var4) {
         var1.clear();
       } else {
-        Throwable throwable = fetchAssertFailed(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
+        Throwable throwable = createAssertionError(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
         throw throwable
       }
     } catch (Throwable var3) {
@@ -149,7 +149,7 @@ class AssertExample {
     var10000 = null;
   }
 
-  public static AssertionError fetchAssertFailed(Object expression, Object message) {
+  public static AssertionError createAssertionError(Object expression, Object message) {
     if (message == null || "".equals(message)) {
       return new PowerAssertionError(expression.toString());
     }
