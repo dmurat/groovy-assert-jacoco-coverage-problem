@@ -2,9 +2,8 @@ package com.example.groovy.assertexample
 
 import groovy.transform.CompileStatic
 import org.codehaus.groovy.runtime.DefaultGroovyMethods
-import org.codehaus.groovy.runtime.ScriptBytecodeAdapter
+import org.codehaus.groovy.runtime.InvokerHelper
 import org.codehaus.groovy.runtime.powerassert.AssertionRenderer
-import org.codehaus.groovy.runtime.powerassert.PowerAssertionError
 import org.codehaus.groovy.runtime.powerassert.ValueRecorder
 
 @CompileStatic
@@ -27,7 +26,7 @@ class AssertExample {
       if (var10000 != null) {
         var1.clear();
       } else {
-        ScriptBytecodeAdapter.assertFailed(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
+        throw InvokerHelper.createAssertError(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
       }
     } catch (Throwable var3) {
       var1.clear();
@@ -49,12 +48,10 @@ class AssertExample {
       if (var10000 != null) {
         var1.clear();
       } else {
-        Throwable throwable = createAssertionError(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
-        throw throwable
+        throw InvokerHelper.createAssertError(AssertionRenderer.render("assert firstName != null", var1), (Object)null);
       }
-    } catch (Throwable var3) {
+    } finally {
       var1.clear();
-      throw var3;
     }
 
     DefaultGroovyMethods.println(this, this.firstName);
@@ -96,7 +93,7 @@ class AssertExample {
       if (var4) {
         var1.clear();
       } else {
-        ScriptBytecodeAdapter.assertFailed(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
+        throw InvokerHelper.createAssertError(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
       }
     } catch (Throwable var3) {
       var1.clear();
@@ -137,22 +134,13 @@ class AssertExample {
       if (var4) {
         var1.clear();
       } else {
-        Throwable throwable = createAssertionError(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
-        throw throwable
+        throw InvokerHelper.createAssertError(AssertionRenderer.render("assert firstName != null && !firstName.isBlank()", var1), (Object)null);
       }
-    } catch (Throwable var3) {
+    } finally {
       var1.clear();
-      throw var3;
     }
 
     DefaultGroovyMethods.println(this, this.firstName);
     var10000 = null;
-  }
-
-  public static AssertionError createAssertionError(Object expression, Object message) {
-    if (message == null || "".equals(message)) {
-      return new PowerAssertionError(expression.toString());
-    }
-    return new AssertionError((Object)("" + message + ". Expression: " + expression));
   }
 }
