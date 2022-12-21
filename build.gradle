@@ -11,6 +11,9 @@ targetCompatibility = "17"
 
 repositories {
   mavenCentral()
+  maven {
+    url "https://repository.apache.org/content/repositories/snapshots"
+  }
 }
 
 configurations {
@@ -33,6 +36,6 @@ jacocoTestReport {
 }
 
 dependencies {
-  implementation "org.apache.groovy:groovy:4.0.6"
+  implementation "org.apache.groovy:groovy:4.0.7-SNAPSHOT"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
 }
