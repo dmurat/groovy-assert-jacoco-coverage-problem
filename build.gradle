@@ -36,6 +36,6 @@ jacocoTestReport {
 }
 
 dependencies {
-  implementation "org.apache.groovy:groovy:4.0.7-SNAPSHOT"
+  implementation "org.apache.groovy:groovy:4.0.8-SNAPSHOT"
   testImplementation "org.spockframework:spock-core:2.3-groovy-4.0"
 }
